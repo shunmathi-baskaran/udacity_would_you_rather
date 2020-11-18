@@ -10,34 +10,28 @@ class NewQuestion extends Component {
         redirect: false
     }
     
+    //dispatch add new question
     addQuestion= (event) => {
         event.preventDefault();
         const {optionOneText,optionTwoText} = this.state;
         const { dispatch } = this.props;
-        dispatch(handleAddQuestion(optionOneText, optionTwoText));
-        this.setState({
-            optionOneText: '',
-            optionTwoText: '',
-            redirect: true
-        })
+        if(optionOneText !== '' && optionTwoText !== ''){
+            dispatch(handleAddQuestion(optionOneText, optionTwoText));
+            this.setState({
+                optionOneText: '',
+                optionTwoText: '',
+                redirect: true
+            })
+        }else {
+            alert('Blank is not a valid value')
+        }
     }
 
-
-    handleText1Change=(event) => {
+    // set new text to state
+    handleTextChange=(event) => {
         event.preventDefault();
-        const optionOneText = event.target.value;
         this.setState({
-            optionOneText
-        })
-    }
-
-
-    
-    handleText2Change=(event) => {
-        event.preventDefault();
-        const optionTwoText = event.target.value;
-        this.setState({
-            optionTwoText
+            [event.target.name]: event.target.value
         })
     }
 
@@ -52,11 +46,11 @@ class NewQuestion extends Component {
                 <h3>Complete the question</h3>
                 <h4>Would you rather...</h4>
                 <form className="qn-form">
-                <input id="optionOne" type="text" placeholder="Enter Option 1 text here" 
-                    value={this.state.textOneText} onChange={this.handleText1Change}/>
+                <input id="optionOne" name="optionOneText" type="text" placeholder="Enter Option 1 text here" 
+                    value={this.state.textOneText} onChange={this.handleTextChange}/>
                 <p>OR</p>
-                <input id="optionTwo" type="text" placeholder="Enter Option 2 text here"
-                    value={this.state.textTwoText} onChange={this.handleText2Change}/>
+                <input id="optionTwo" name="optionTwoText" type="text" placeholder="Enter Option 2 text here"
+                    value={this.state.textTwoText} onChange={this.handleTextChange}/>
                     <br/>
                 <button type="submit" className="submit-btn" onClick={(event)=> this.addQuestion(event)}>Submit</button>
                 </form>

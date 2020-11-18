@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 
 export default class ResultsView extends Component {
+    //calculate percentage of votes for both options
     calculatePercentage = (votes, totalVotes) =>{
         return ((votes / totalVotes)*100).toFixed(2);
     }

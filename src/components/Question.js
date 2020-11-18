@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Link, Redirect } from 'react-router-dom'
+import { Link } from 'react-router-dom'
+import PageNotFound from './PageNotFound'
 
 class Question extends Component {
     render() {
-        if(this.props.authedUser === null) {
-            return <Redirect to='/' />
+        if(this.props.question === undefined) {
+            return <PageNotFound />
         }
         return (
             <div className="question">

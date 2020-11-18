@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import UserProfile from './UserProfile';
 
 class LeaderBoard extends Component {
+    //calculate overall score of a user
     calculateScore =(user) => {
         return (Object.keys(user.answers).length) + (user.questions.length)
     }
@@ -10,7 +11,6 @@ class LeaderBoard extends Component {
         const {users } = this.props;
         return (
             <div className="users">
-                {console.log(Object.values(users))}
                <ul>
                 {Object.values(users).sort((a,b)=> this.calculateScore(b)- this.calculateScore(a)).map(user => {
                 return  <li key={user.id}>

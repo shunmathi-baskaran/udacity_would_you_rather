@@ -1,14 +1,15 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Redirect } from 'react-router-dom'
 import { handleAnswerQuestion } from '../actions/questions'
+import PageNotFound from './PageNotFound'
 
 
 class AnswerQuestion extends Component {
     state = {
         selectedOption: '',
     }
-
+    
+    //dispatch calling for saving the answer to a question
     answerQuestion= (event) => {
         event.preventDefault();
         const {selectedOption} = this.state;
@@ -17,17 +18,18 @@ class AnswerQuestion extends Component {
         this.props.history.push(`/results/${question.id}`);
     }
 
+    //onchange function for radio button value
     setRadioButtonValue = (event) => {
         const selectedOption = event.target.value;
-        console.log(selectedOption)
         this.setState({
             selectedOption
         })
     }
 
     render() {
-        if(this.props.authedUser === null) {
-            return <Redirect to= '/' />
+        //Rendering PageNotFound if error in question id
+        if(this.props.question === undefined) {
+            return <PageNotFound />
         }
         return (
             <div className="question">

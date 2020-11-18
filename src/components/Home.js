@@ -7,6 +7,7 @@ class Home extends Component {
         questionType : 'unanswered'
     }
 
+    // onclick event handler for answered question
     showAnsweredQuestions(event) {
         event.preventDefault();
         document.getElementById('unanswered-btn').classList.remove('active');
@@ -16,6 +17,8 @@ class Home extends Component {
         })
     }
 
+
+    // onclick event handler for unanswered question
     showUnAnsweredQuestions(event) {
         event.preventDefault();
         document.getElementById('answered-btn').classList.remove('active');

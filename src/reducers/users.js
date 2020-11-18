@@ -8,7 +8,6 @@ export default function receiveUsers(state={}, action) {
             ...action.users
         }
         case ADD_QUESTION_TO_USER: 
-        console.log(state);
         const {user, qnId} = action;
         let questions = {
             [user.id]: {

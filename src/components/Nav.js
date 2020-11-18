@@ -5,6 +5,7 @@ import  {resetAuthedUser}  from '../actions/authedUser'
 import { Redirect } from 'react-router-dom';
 
 export class Nav extends Component {
+    //dispatch reset AuthedUser on logout
     logout = (event) => {
         event.preventDefault();
         const {dispatch} = this.props;
@@ -12,7 +13,6 @@ export class Nav extends Component {
     }
 
     render() {
-
         if(this.props.authedUser === null) {
             return <Redirect to='/' />
         }

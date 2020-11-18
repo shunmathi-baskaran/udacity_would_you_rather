@@ -1,13 +1,12 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import ResultsView from './ResultsView'
-import { Redirect } from 'react-router-dom'
+import PageNotFound from './PageNotFound'
 
 class ResultsPage extends Component {
-    
     render() {
-        if(this.props.authedUser === null) {
-            return <Redirect to='/' />
+        if(this.props.question === undefined) {
+            return <PageNotFound />
         }
         const {user, author, question} = this.props;
         const totalVotes = question.optionOne.votes.length + question.optionTwo.votes.length;

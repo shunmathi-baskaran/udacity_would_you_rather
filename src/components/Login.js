@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { Redirect } from 'react-router-dom';
+import { Redirect, withRouter } from 'react-router-dom';
 import  {setAuthedUser}  from '../actions/authedUser'
 
 class Login extends Component {
@@ -8,7 +8,8 @@ class Login extends Component {
         redirect: false,
         option: ''
     }
-
+    
+    //event handler for user id selection
     setOptionValue(event) {
         const option = event.target.value;
         this.setState({
@@ -16,8 +17,8 @@ class Login extends Component {
         })
     }
 
-
-    setAuthedUser(event){
+    //set AuthedUse on login
+    setAuthedUser(event){ 
         event.preventDefault();
         const {dispatch} = this.props;
         const user = document.getElementById('users').value;
@@ -28,11 +29,16 @@ class Login extends Component {
     }
 
     render() {
+        const  {from}  = this.props.location.state || '/'
         const {userIds} = this.props;
         const {redirect }=this.state;
 
         if(redirect === true) {
-            return <Redirect to='/home' />
+            if(from === undefined){
+                return <Redirect to= '/home' />
+            }else{
+                return <Redirect to= {from} />
+            }
         }
         return (
             <div className="login">
@@ -63,4 +69,4 @@ function mapStateToProps({ users }) {
     }
 }
 
-export default connect(mapStateToProps)(Login)
+export default withRouter(connect(mapStateToProps)(Login))

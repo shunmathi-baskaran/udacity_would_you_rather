@@ -10,7 +10,9 @@ import LoadingBar  from 'react-redux-loading'
 import ResultsPage from './ResultsPage'
 import LeaderBoard from './LeaderBoard'
 import Nav from './Nav'
-import {Route} from 'react-router-dom'
+import {Route, Switch} from 'react-router-dom'
+import PrivateRoute from './PrivateRoute'
+import PageNotFound from './PageNotFound';
 
 
 class App extends Component {
@@ -25,18 +27,21 @@ class App extends Component {
         <div className="App">
           <Nav />
           <Fragment>
-            <Route exact path='/' component= {Login} />
-            <Route exact path='/home' component= {Home} />
-            <Route exact path='/question/:id' component = {AnswerQuestion} />
-            <Route exact path='/results/:id' component = {ResultsPage} />
-            <Route exact path='/add' component = {NewQuestion} />
-            <Route exact path='/leaderBoard' component = {LeaderBoard} />
+            <Switch>
+              <Route exact path='/' component= {Login} />
+              <PrivateRoute  path='/home' component= {Home} />
+              <PrivateRoute  path='/question/:id' component = {AnswerQuestion} />
+              <PrivateRoute  path='/results/:id' component = {ResultsPage} />
+              <PrivateRoute  path='/add' component = {NewQuestion} />
+              <PrivateRoute  path='/leaderBoard' component = {LeaderBoard} />
+              <Route path='*' component= { PageNotFound } />
+            </Switch>
           </Fragment>
         </div>
       </Fragment>
     )
   }
- 
 }
+
 
 export default connect()(App);
